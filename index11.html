@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAMA ❤️ SUSHANT</title>
+
+<style>
+*{box-sizing:border-box;font-family:sans-serif;}
+body{
+    margin:0;
+    background:black;
+    color:white;
+    overflow-x:hidden;
+}
+canvas{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* SECTIONS */
+section{
+    min-height:100vh;
+    padding:20px;
+    display:none;
+}
+.active{display:block;}
+
+/* LOCK BOX */
+.lock-box{
+    margin:auto;
+    margin-top:20vh;
+    width:90%;
+    max-width:320px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(8px);
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+}
+input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d88;
+    color:white;
+    font-size:16px;
+}
+.shake{animation:shake 0.5s;}
+@keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    50%{transform:translateX(5px);}
+    75%{transform:translateX(-5px);}
+    100%{transform:translateX(0);}
+}
+
+/* PAGE CONTENT */
+.center{text-align:center;}
+img{
+    width:90%;
+    max-width:350px;
+    border-radius:20px;
+}
+/* lock GIF sizing */
+.lock-box img#lockGif{
+    width:120px;
+    height:auto;
+    display:block;
+    margin:0 auto 12px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.4);
+}
+.box{
+    display:none;
+    background:white;
+    color:black;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+}
+.slider img{
+    width:100%;
+    border-radius:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" autoplay loop>
+    <source src="WhatsApp Audio 2026-01-06 at 2.33.14 PM.mp3" type="audio/mpeg">
+</audio>
+
+<!-- FIREWORKS -->
+<canvas id="fireworks"></canvas>
+
+<!-- 🔐 SECTION 1: LOCK -->
+<section id="lock" class="active">
+    <div class="lock-box" id="lockBox">
+        <!-- Add your GIF file here (e.g. lock.gif) -->
+        <img id="lockGif" src="kiss.gif" alt="lock GIF">
+        <h2>🔒 Letter For My MAMA ❤️</h2>
+        <p>your love SUSHANT 💖</p>
+        <input type="password" id="pass" placeholder="Enter Password">
+        <button onclick="unlock()">UNLOCK ME ❤️</button>
+        <p id="msg"></p>
+    </div>
+</section>
+
+<!-- 💝 SECTION 2 -->
+<section id="page1">
+    <div class="center">
+        <h2>MAMA ❤️ SUSHANT</h2>
+        <img src="Generate_a_cartoon_202601051239.gif">
+        <br>
+        <button onclick="showBox('msg1')">🎁 Surprise</button>
+
+        <div class="box" id="msg1">
+            My dearest <b>MAMA ❤️</b><br><br>
+            Will you give me a CHUMMY🙈? 💋  
+            <b><br><br>
+            I miss you endlessly 🌹
+        </div>
+
+        <br>
+        <button onclick="go('page2')">NEXT ➡️</button>
+    </div>
+</section>
+
+<!-- 💌 SECTION 3 -->
+<section id="page2">
+    <div class="center">
+        <h2>MAMA ❤️ SUSHANT</h2>
+
+        <div class="slider">
+            <!-- Put your GIF files (e.g. fun1.gif, fun2.gif) in the same folder and list them in the JS below -->
+            <img id="slide" src="hug.png" alt="slideshow">
+            <div style="margin-top:10px;">
+                <button id="prevBtn">⏮️ Prev</button>
+                <button id="playPauseBtn">⏸️ Pause</button>
+                <button id="nextBtn">⏭️ Next</button>
+            </div>
+            <p id="caption" style="margin-top:8px;"></p>
+        </div>
+
+        <button onclick="showBox('l1')">💌 Open Letter 1</button>
+        <div class="box" id="l1">
+            My MAMA ❤️,<br><br>
+            <h4>“No matter where I am, my thoughts find you"  </h4>
+    <p>MAMA I’m missing you extra today. Your hugs, your smile, the way everything feels right when we’re together😘. YAR....MAMA kebe pakha ku asa au CHUMMY dei daudi daudi palaaa🙈. </p>.  
+            — SUSHANT 💖
+        </div>
+
+        <button onclick="showBox('l2')">💖 Open Letter 2</button>
+        <div class="box" id="l2">
+            love MAMA ❤️,<br><br>
+            <p>my PASANDIDA AROUT 🥰,<br>
+      You know since last two days mine mind is full of you, Even mora bhi exams achhi , Still i am being disturb by one thing that is YOUR CHUMMY...Last day tame kahilal mate CUMMY...😜 EVENING  re daba boli.Ete khusi heithili ki mouth brush b karithili 😜sata re mate au nida hau nhi se katha bhabila bea thu.
+       I can’t stop smiling because you’re on my mind again. Every little thought of you makes my heart feel warm and happy. Tame jadi mora pakhare thile, I’d gently ask for one sweet kiss…💋 which could be enough to make my day perfect.
+            — SUSHANT 💕
+        </div>
+
+        <button onclick="final()">🎉 Final Surprise</button>
+    </div>
+</section>
+
+<script>
+/* MUSIC MOBILE FIX */
+document.addEventListener("click",()=>{
+    let m=document.getElementById("bgMusic");
+    if(m.paused)m.play();
+});
+
+/* UNLOCK */
+function unlock(){
+    let p=document.getElementById("pass").value;
+    let box=document.getElementById("lockBox");
+    if(p==="PRAMILA"){
+        document.getElementById("lock").classList.remove("active");
+        document.getElementById("page1").classList.add("active");
+        window.scrollTo(0,0);
+    }else{
+        box.classList.add("shake");
+        setTimeout(()=>box.classList.remove("shake"),500);
+        document.getElementById("msg").innerText="ENTER CORRECT PASSWORD MY LOVE 💕";
+    }
+}
+
+/* NAVIGATION */
+function go(id){
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    window.scrollTo(0,0);
+}
+
+/* SHOW BOX */
+function showBox(id){
+    document.getElementById(id).style.display="block";
+}
+
+/* FINAL */
+function final(){
+    alert("MAMA ❤️ YOU ARE MY EVERYTHING — LOVE, SUSHANT 💖");
+}
+
+/* SLIDER */
+let imgs=["cosytales-kawaii.gif","cosytales-love.gif","cosytales-couple.gif","bunny-bunnies.gif","bubu-dudu-kisses.gif"];
+let i=0;
+setInterval(()=>{
+    i=(i+1)%imgs.length;
+    document.getElementById("slide").src=imgs[i];
+},2000);
+
+/* FIREWORKS */
+const c=document.getElementById("fireworks");
+const ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let fw=[];
+function Fire(){
+    this.x=Math.random()*c.width;
+    this.y=Math.random()*c.height/2;
+    this.r=2;this.l=80;
+}
+function animate(){
+    ctx.clearRect(0,0,c.width,c.height);
+    if(Math.random()<0.05)fw.push(new Fire());
+    fw.forEach((f,i)=>{
+        ctx.beginPath();
+        ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+        ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
+        ctx.fill();
+        f.r+=0.4;f.l--;
+        if(f.l<=0)fw.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
+d
